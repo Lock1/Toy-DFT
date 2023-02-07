@@ -50,10 +50,14 @@ class Matrix {
 int main(void) {
     Matrix *source = new Matrix();
     source->readMatrix();
+
+    complex<double> sum = 0.0;
     for (int i = 0; i < source->size(); i++) {
-        for (int j = 0; j < source->size(); j++)
-            cout << source->dftElement(i, j);
-        cout << endl;
+        for (int j = 0; j < source->size(); j++) {
+            complex<double> el = source->dftElement(i, j);
+            sum                += el;
+        }
     }
+    cout << sum / (double) source->size();
     return 0;
 }
