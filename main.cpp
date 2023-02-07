@@ -59,11 +59,11 @@ complex<double> Matrix::dftElement(int k, int l) {
 
 
 int main(void) {
-    Matrix a;
-    a.readMatrix();
-    for (int i = 0; i < a.size(); i++) {
-        for (int j = 0; j < a.size(); j++)
-            cout << a.dftElement(i, j) * 9.0;
+    Matrix *source = new Matrix();
+    source->readMatrix();
+    for (int i = 0; i < source->size(); i++) {
+        for (int j = 0; j < source->size(); j++)
+            cout << source->dftElement(i, j);
         cout << endl;
     }
     return 0;
