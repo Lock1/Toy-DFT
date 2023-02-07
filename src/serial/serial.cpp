@@ -15,46 +15,35 @@ class Matrix {
         vector<vector<double>> *data_ptr;
         vector<vector<double>> &data;
     public:
-        Matrix();
-        ~Matrix();
-
-        void readMatrix();
-        int size();
-        complex<double> dftElement(int k, int l);
-};
-
-Matrix::Matrix() : data_ptr(new vector<vector<double>>()), data(*data_ptr) {
-    this->data.resize(10, vector<double>(10, 0));
-}
-
-Matrix::~Matrix() {
-    delete data_ptr;
-}
-
-int Matrix::size() {
-    return this->n;
-}
-
-void Matrix::readMatrix() {
-    cin >> this->n;
-    this->data.resize(this->n, vector<double>(this->n, 0.0));
-    for (int i = 0; i < this->n; i++)
-        for (int j = 0; j < this->n; j++)
-            cin >> this->data[i][j];
-}
-
-complex<double> Matrix::dftElement(int k, int l) {
-    complex<double> element = 0;
-    for (int m = 0; m < this->n; m++) {
-        for (int n = 0; n < this->n; n++) {
-            complex<double> sample   = (k*m / (double) this->n) + (l*n / (double) this->n);
-            complex<double> exponent = exp(-2.0i*pi() * sample);
-            element                  += this->data[m][n] * exponent;
+        Matrix() : data_ptr(new vector<vector<double>>()), data(*data_ptr) {
+            this->data.resize(10, vector<double>(10, 0));
         }
-    }
-    return element / (complex<double>) (this->n * this->n);
-}
+        ~Matrix() {
+            delete data_ptr;
+        }
 
+        void readMatrix() {
+            cin >> this->n;
+            this->data.resize(this->n, vector<double>(this->n, 0.0));
+            for (int i = 0; i < this->n; i++)
+                for (int j = 0; j < this->n; j++)
+                    cin >> this->data[i][j];
+        }
+        int size() {
+            return this->n;
+        }
+        complex<double> dftElement(int k, int l) {
+            complex<double> element = 0;
+            for (int m = 0; m < this->n; m++) {
+                for (int n = 0; n < this->n; n++) {
+                    complex<double> sample = (k*m / (double) this->n) + (l*n / (double) this->n);
+                    complex<double> exponent = exp(-2.0i*pi() * sample);
+                    element += this->data[m][n] * exponent;
+                }
+            }
+            return element / (complex<double>)(this->n * this->n);
+        }
+};
 
 
 
