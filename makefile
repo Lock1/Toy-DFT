@@ -1,7 +1,9 @@
-runtime: all
-	time ./main < gn.txt > o.txt
+OUTPUT_FOLDER = bin
 
-all: main
+all: serial parallel
 
-main:
-	g++ main.cpp -o main
+parallel:
+# TODO : Parallel compilation
+
+serial:
+	g++ src/serial/serial.cpp -o $(OUTPUT_FOLDER)/serial
