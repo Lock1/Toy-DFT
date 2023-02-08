@@ -1,5 +1,5 @@
 import random
-size = 32
+size = 4
 
 print(size)
 for i in range(size):

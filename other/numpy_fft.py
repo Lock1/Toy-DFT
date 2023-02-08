@@ -11,4 +11,5 @@ for i in range(size):
 
 result = numpy.fft.fft2(matrix) / size**2
 
-print(numpy.average(result))
+print(result)
+# print(numpy.average(result))
