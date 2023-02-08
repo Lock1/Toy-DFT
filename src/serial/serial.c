@@ -10,6 +10,11 @@ struct Matrix {
     double mat[MAX_N][MAX_N];
 };
 
+struct FreqMatrix {
+    int    size;
+    double complex mat[MAX_N][MAX_N];
+};
+
 void readMatrix(struct Matrix *m) {
     scanf("%d", &(m->size));
     for (int i = 0; i < m->size; i++)
@@ -32,18 +37,26 @@ double complex dft(struct Matrix *mat, int k, int l) {
 
 
 int main(void) {
-    struct Matrix source;
+    struct Matrix     source;
+    struct FreqMatrix freq_domain;
     readMatrix(&source);
+    freq_domain.size = source.size;
+    
+    for (int k = 0; k < source.size; k++)
+        for (int l = 0; l < source.size; l++)
+            freq_domain.mat[k][l] = dft(&source, k, l);
+
     double complex sum = 0.0;
-    for (int i = 0; i < source.size; i++) {
-        for (int j = 0; j < source.size; j++) {
-            double complex el = dft(&source, i, j);
-            sum += el;
+    for (int k = 0; k < source.size; k++) {
+        for (int l = 0; l < source.size; l++) {
+            double complex el = freq_domain.mat[k][l];
             printf("(%lf, %lf) ", creal(el), cimag(el));
+            sum += el;
         }
         printf("\n");
     }
     sum /= source.size;
     printf("Average : (%lf, %lf)", creal(sum), cimag(sum));
+
     return 0;
 }
