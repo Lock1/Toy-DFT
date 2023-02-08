@@ -1,5 +1,6 @@
 import random
-size = 4
+import sys
+size = int(sys.argv[1])
 
 print(size)
 for i in range(size):
